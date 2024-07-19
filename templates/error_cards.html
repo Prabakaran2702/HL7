@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-4">
+    <h1 class="mb-4">Error Cards</h1>
+
+    <!-- Display error counts -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Error Counts</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-exclamation-triangle"></i> Patient name not found: <strong>{{ error_counts.patient_name_not_found }}</strong></li>
+                        <li><i class="fas fa-exclamation-triangle"></i> DOB not found: <strong>{{ error_counts.dob_not_found }}</strong></li>
+                        <li><i class="fas fa-exclamation-triangle"></i> Other errors: <strong>{{ error_counts.other_error }}</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Display error counts -->
+
+    <!-- Display error cards -->
+    <div class="row">
+        {% for error in errors %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-primary">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">{{ error.error_type }}</h5>
+                    <p class="card-text">{{ error.error_message }}</p>
+                    <p class="card-text"><small class="text-muted">{{ error.date_occurred }}</small></p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-md-4 mb-4">
+            <div class="card border-success">
+                <div class="card-body">
+                    <h5 class="card-title text-success">No Errors</h5>
+                    <p class="card-text">All patient records are error-free.</p>
+                    <p class="card-text"><small class="text-muted">All records are stored correctly.</small></p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <!--End Display error cards -->
+</div>
+
+<!-- Include Font Awesome for icons -->
+
+{% endblock %}
